@@ -1,0 +1,74 @@
+{
+  "USD": {
+    "base_score": 75.5,
+    "factors": {
+      "interest_rate": 5.5,
+      "gdp_growth": 2.5,
+      "inflation": 3.2,
+      "employment": 3.7
+    }
+  },
+  "EUR": {
+    "base_score": 68.2,
+    "factors": {
+      "interest_rate": 4.5,
+      "gdp_growth": 0.8,
+      "inflation": 2.9,
+      "employment": 6.5
+    }
+  },
+  "GBP": {
+    "base_score": 72.1,
+    "factors": {
+      "interest_rate": 5.25,
+      "gdp_growth": 0.3,
+      "inflation": 4.0,
+      "employment": 4.2
+    }
+  },
+  "JPY": {
+    "base_score": 64.3,
+    "factors": {
+      "interest_rate": -0.1,
+      "gdp_growth": 1.2,
+      "inflation": 2.5,
+      "employment": 2.6
+    }
+  },
+  "CHF": {
+    "base_score": 70.8,
+    "factors": {
+      "interest_rate": 1.75,
+      "gdp_growth": 0.9,
+      "inflation": 1.7,
+      "employment": 2.1
+    }
+  },
+  "AUD": {
+    "base_score": 66.5,
+    "factors": {
+      "interest_rate": 4.35,
+      "gdp_growth": 1.8,
+      "inflation": 5.4,
+      "employment": 3.6
+    }
+  },
+  "CAD": {
+    "base_score": 69.2,
+    "factors": {
+      "interest_rate": 5.0,
+      "gdp_growth": 1.1,
+      "inflation": 3.6,
+      "employment": 5.0
+    }
+  },
+  "NZD": {
+    "base_score": 63.7,
+    "factors": {
+      "interest_rate": 5.5,
+      "gdp_growth": 0.6,
+      "inflation": 6.0,
+      "employment": 3.4
+    }
+  }
+}

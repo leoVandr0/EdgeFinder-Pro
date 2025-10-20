@@ -1,0 +1,71 @@
+[
+  {
+    "currency": "USD",
+    "event_name": "Non-Farm Payrolls",
+    "impact": "High",
+    "actual": "250K",
+    "forecast": "200K",
+    "previous": "180K"
+  },
+  {
+    "currency": "EUR",
+    "event_name": "ECB Interest Rate Decision",
+    "impact": "High",
+    "forecast": "4.50%",
+    "previous": "4.25%"
+  },
+  {
+    "currency": "GBP",
+    "event_name": "UK GDP Growth Rate",
+    "impact": "High",
+    "actual": "0.3%",
+    "forecast": "0.2%",
+    "previous": "0.1%"
+  },
+  {
+    "currency": "JPY",
+    "event_name": "BoJ Monetary Policy Statement",
+    "impact": "High"
+  },
+  {
+    "currency": "USD",
+    "event_name": "Consumer Price Index (CPI)",
+    "impact": "High",
+    "actual": "3.2%",
+    "forecast": "3.0%",
+    "previous": "2.9%"
+  },
+  {
+    "currency": "EUR",
+    "event_name": "German Manufacturing PMI",
+    "impact": "Medium",
+    "actual": "48.5",
+    "forecast": "49.0",
+    "previous": "49.2"
+  },
+  {
+    "currency": "AUD",
+    "event_name": "RBA Interest Rate Decision",
+    "impact": "High",
+    "forecast": "4.35%",
+    "previous": "4.10%"
+  },
+  {
+    "currency": "CAD",
+    "event_name": "Employment Change",
+    "impact": "Medium",
+    "actual": "25K",
+    "forecast": "20K",
+    "previous": "15K"
+  },
+  {
+    "currency": "USD",
+    "event_name": "FOMC Meeting Minutes",
+    "impact": "High"
+  },
+  {
+    "currency": "CHF",
+    "event_name": "SNB Quarterly Assessment",
+    "impact": "Medium"
+  }
+]
