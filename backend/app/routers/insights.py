@@ -19,7 +19,7 @@ async def get_trade_insights(
     - Risk-reward ratios
     """
     try:
-        insights = generate_trade_insights(limit=limit)
+        insights = await generate_trade_insights(limit=limit)
         return [Insight(**insight) for insight in insights]
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating insights: {str(e)}")
@@ -39,7 +39,7 @@ async def get_pair_insights(pair: str):
             else:
                 raise HTTPException(status_code=400, detail="Invalid pair format")
 
-        all_insights = generate_trade_insights(limit=50)
+        all_insights = await generate_trade_insights(limit=50)
 
         # Filter for specific pair
         pair_insights = [i for i in all_insights if i["pair"] == pair]

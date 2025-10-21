@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from app.services.analytics import calculate_currency_strength
+from app.services.analytics import calculate_currency_strength_async
 from app.models.strength import StrengthResponse
 
 router = APIRouter(prefix="/api/strength", tags=["Currency Strength"])
@@ -15,7 +15,7 @@ async def get_currency_strength():
     - Market sentiment
     """
     try:
-        return calculate_currency_strength()
+        return await calculate_currency_strength_async()
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error calculating strength: {str(e)}")
 
@@ -23,7 +23,7 @@ async def get_currency_strength():
 async def get_single_currency_strength(currency_code: str):
     """Get strength data for a specific currency"""
     try:
-        data = calculate_currency_strength()
+        data = await calculate_currency_strength_async()
         currency = currency_code.upper()
 
         if currency not in data.strengths:

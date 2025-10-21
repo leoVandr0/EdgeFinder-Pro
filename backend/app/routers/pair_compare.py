@@ -26,7 +26,7 @@ async def compare_currency_pair(
         if len(base) != 3 or len(quote) != 3:
             raise HTTPException(status_code=400, detail="Currency codes must be 3 characters")
 
-        result = calculate_pair_comparison(base, quote)
+        result = await calculate_pair_comparison(base, quote)
 
         if "error" in result:
             raise HTTPException(status_code=404, detail=result["error"])
@@ -57,7 +57,7 @@ async def compare_pair_direct(pair: str):
         else:
             raise HTTPException(status_code=400, detail="Invalid pair format. Use EUR/USD or EURUSD")
 
-        result = calculate_pair_comparison(base, quote)
+        result = await calculate_pair_comparison(base, quote)
 
         if "error" in result:
             raise HTTPException(status_code=404, detail=result["error"])

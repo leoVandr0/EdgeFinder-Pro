@@ -8,12 +8,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Import routers
-from app.routers import strength, insights, events, pair_compare, news_summary
+from app.routers import strength, insights, events, pair_compare, news_summary, admin, indices, websocket, auth_router, watchlist, charts
 
 # Create FastAPI app
 app = FastAPI(
-    title="EdgeFinder Pro API",
-    description="Advanced forex analytics and trading insights platform",
+    title="Richy's Board API",
+    description="Advanced forex analytics and trading insights platform with authentication, watchlists, and technical indicators",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc"
@@ -31,27 +31,37 @@ app.add_middleware(
 )
 
 # Include routers
+app.include_router(auth_router.router)
+app.include_router(watchlist.router)
+app.include_router(charts.router)
 app.include_router(strength.router)
 app.include_router(insights.router)
 app.include_router(events.router)
 app.include_router(pair_compare.router)
 app.include_router(news_summary.router)
+app.include_router(indices.router)
+app.include_router(websocket.router)
+app.include_router(admin.router)
 
 # Health check endpoint
 @app.get("/")
 async def root():
     """API health check and information"""
     return {
-        "service": "EdgeFinder Pro API",
+        "service": "Richy's Board API",
         "status": "operational",
         "version": "1.0.0",
         "endpoints": {
             "docs": "/docs",
+            "auth": "/api/auth",
+            "watchlist": "/api/watchlist",
+            "charts": "/api/charts",
             "strength": "/api/strength",
             "insights": "/api/insights",
             "events": "/api/events",
             "pair_compare": "/api/pair-compare",
-            "news_summary": "/api/news-summary"
+            "news_summary": "/api/news-summary",
+            "indices": "/api/indices"
         }
     }
 
@@ -64,7 +74,8 @@ async def health_check():
 @app.on_event("startup")
 async def startup_event():
     """Initialize services on startup"""
-    print("Starting EdgeFinder Pro API...")
+    import asyncio
+    print("Starting Richy's Board API...")
     print(f"CORS enabled for: {allowed_origins}")
 
     # Initialize databases (if configured)
@@ -80,11 +91,16 @@ async def startup_event():
         print(f"Database initialization warning: {e}")
         print("Running with in-memory fallback")
 
+    # Start WebSocket broadcast task
+    from app.services.websocket_manager import broadcast_price_updates
+    asyncio.create_task(broadcast_price_updates())
+    print("WebSocket broadcast task started")
+
 # Shutdown event
 @app.on_event("shutdown")
 async def shutdown_event():
     """Cleanup on shutdown"""
-    print("Shutting down EdgeFinder Pro API...")
+    print("Shutting down Richy's Board API...")
     try:
         from app.services.db import close_mongodb
         await close_mongodb()

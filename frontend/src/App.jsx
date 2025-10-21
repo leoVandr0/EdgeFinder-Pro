@@ -6,11 +6,14 @@ import Events from './pages/Events';
 import Compare from './pages/Compare';
 import Insights from './pages/Insights';
 import News from './pages/News';
+import PWAInstallPrompt from './components/PWAInstallPrompt';
+import OfflineIndicator from './components/OfflineIndicator';
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
+        <OfflineIndicator />
         <Navbar />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <Routes>
@@ -22,6 +25,7 @@ function App() {
             <Route path="/news" element={<News />} />
           </Routes>
         </main>
+        <PWAInstallPrompt />
       </div>
     </Router>
   );

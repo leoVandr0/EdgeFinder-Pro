@@ -22,7 +22,7 @@ const Navbar = () => {
           <div className="flex">
             <Link to="/" className="flex items-center">
               <TrendingUp className="h-8 w-8 text-primary-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900">EdgeFinder Pro</span>
+              <span className="ml-2 text-xl font-bold text-gray-900">Richy's Board</span>
             </Link>
           </div>
 

@@ -85,35 +85,39 @@ async def get_news_summaries(
     currency: Optional[str] = Query(None, description="Filter by currency mention")
 ):
     """
-    Get AI-summarized forex news with sentiment analysis.
+    Get real forex news with sentiment analysis from ForexFactory, Investing.com, and DailyFX.
 
     Returns:
-    - Condensed article summaries
+    - Real news articles from live sources
     - Sentiment scoring (positive, neutral, negative)
     - Source and timestamp
     - Relevance to currency markets
     """
-    try:
-        news = SAMPLE_NEWS.copy()
+    # Import here to avoid circular imports
+    from app.services.news_fetcher import get_real_forex_news
 
-        # Filter by currency if specified
-        if currency:
-            currency = currency.upper()
-            news = [
-                article for article in news
-                if currency.lower() in article["title"].lower() or
-                   currency.lower() in article["content"].lower()
-            ]
+    # Get real news
+    news = await get_real_forex_news(limit=limit * 2)  # Fetch more for filtering
 
-        # Generate summaries with sentiment
-        summaries = generate_news_summary(news, max_items=limit)
+    # Filter by currency if specified
+    if currency:
+        currency = currency.upper()
+        news = [
+            article for article in news
+            if currency.lower() in article.get("title", "").lower() or
+               currency.lower() in article.get("content", "").lower()
+        ]
 
-        return {
-            "total": len(summaries),
-            "articles": summaries
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error generating summaries: {str(e)}")
+    # Limit results
+    news = news[:limit]
+
+    # Generate summaries with sentiment
+    summaries = generate_news_summary(news, max_items=limit)
+
+    return {
+        "total": len(summaries),
+        "articles": summaries
+    }
 
 @router.get("/sentiment")
 async def get_overall_sentiment():
