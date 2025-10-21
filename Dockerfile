@@ -11,14 +11,14 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
-COPY /backend/requirements.txt /app/
+COPY backend/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Download NLTK data for sentiment analysis
 RUN python -m nltk.downloader punkt averaged_perceptron_tagger
 
 # Copy the application code
-COPY /backend/app /app/app
+COPY backend/app app
 
 # Expose port
 EXPOSE 8000
