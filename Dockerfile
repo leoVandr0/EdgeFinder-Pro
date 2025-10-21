@@ -10,17 +10,15 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy backend requirements
-COPY ./backend/requirements.txt ./requirements.txt
-
-# Install Python dependencies
+# Copy requirements first for better caching
+COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Download NLTK data for sentiment analysis
 RUN python -m nltk.downloader punkt averaged_perceptron_tagger
 
-# Copy all backend code
-COPY ./backend ./
+# Copy the application code
+COPY backend/ .
 
 # Expose port
 EXPOSE 8000
