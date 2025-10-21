@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy backend requirements
-COPY backend/requirements.txt .
+COPY ./backend/requirements.txt ./requirements.txt
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -19,8 +19,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Download NLTK data for sentiment analysis
 RUN python -m nltk.downloader punkt averaged_perceptron_tagger
 
-# Copy backend code
-COPY backend/ .
+# Copy all backend code
+COPY ./backend ./
 
 # Expose port
 EXPOSE 8000
